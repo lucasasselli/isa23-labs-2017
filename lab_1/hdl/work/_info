@@ -1,0 +1,92 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/luca/GDrive/Polito/Magistrale/Integrated System architecture/Lab/Lab 1/hdl
+Pfilter_pkg
+Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z3 w1508163766
+R0
+Z4 8filter_top.vhd
+Z5 Ffilter_top.vhd
+l0
+L4
+V6[JWi[M[:33H>GYdb>]IF0
+!s100 fKzFzk2c5W9nAlANPTF@^2
+Z6 OV;C;10.4d;61
+32
+Z7 !s110 1508223406
+!i10b 1
+Z8 !s108 1508223406.000000
+Z9 !s90 filter_top.vhd|
+Z10 !s107 filter_top.vhd|
+!i113 1
+Z11 tExplicit 1
+Efilter_top
+R3
+Z12 DPx4 work 10 filter_pkg 0 22 6[JWi[M[:33H>GYdb>]IF0
+Z13 DPx4 ieee 16 std_logic_signed 0 22 C<aanc0R`<LWPSe[JYRP^3
+Z14 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+R1
+R2
+R0
+R4
+R5
+l0
+L16
+Vn[T:Hk<YVQ8n9>c8i5iJY3
+!s100 K22^9o_l^j17G4f]W2AKM0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+Abehavioral
+R12
+R13
+R14
+R1
+R2
+DEx4 work 10 filter_top 0 22 n[T:Hk<YVQ8n9>c8i5iJY3
+l37
+L28
+V^1GWlm8<><fM58A=@CCC?3
+!s100 e2LljPHI20V5o[W59ajPe1
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+vtb_filter
+R7
+!i10b 1
+!s100 1J]DcLP4klfSf30oDL][K1
+I^aCWfe[93dALK`@anlSRE0
+VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1508165700
+8tb_filter.v
+Ftb_filter.v
+L0 5
+OV;L;10.4d;61
+r1
+!s85 0
+31
+R8
+!s107 tb_filter.v|
+!s90 tb_filter.v|
+!i113 1
