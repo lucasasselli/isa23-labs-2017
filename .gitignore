@@ -1,5 +1,19 @@
+# Generic 
+**/work
+
+# Modelsim
 */transcript
-**/hdl/work
-*.a
 .directory
 *.wlf
+
+# Synopsis
+**/netlist/*
+!**/netlist/.gitkeep
+**/report/*
+!**/report/.gitkeep
+dwsvf_*
+*.log
+*.svf
+
+# C/CPP
+*.a

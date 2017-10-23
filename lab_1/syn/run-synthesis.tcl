@@ -2,19 +2,15 @@
 remove_design -designs
 
 # Load project
-define design lib WORK -path ./work
-set search path [list . /software/synopsys/syn current/libraries/syn/software/dk/nangate45/synopsys ]
-set link library [list "*" "NangateOpenCellLibrary typical ecsm.db" "dw foundation.sldb" ]
-set target library [list "NangateOpenCellLibrary typical ecsm.db" ]
-set synthetic library [list "dw foundation.sldb" ]
-
-analyze -library WORK -format vhdl {../hdl/filter_top.v}
+analyze -library WORK -format vhdl {../hdl/filter_top.vhd}
 
 # Preserve RTL name in power consumtpion estimation
-set_power_preserve_rtl_hier_names true
+set power_preserve_rtl_hier_names true
 
 # Analyze HDL
 elaborate filter_top -architecture behavioral -library WORK
+
+create_clock -name MY_CLK CLK
 
 # Dumb compilation
 compile -exact_map
@@ -41,9 +37,9 @@ compile -map_effort high
 
 # Export optimized netlist
 ungroup -all -flatten
-change names -hierarchy -rules verilog
-write_sdf ../netlist/filter.sdf
-write sdc ../netlist/filter.sdc
+change_names -hierarchy -rules verilog
+write_sdf netlist/filter.sdf
+write_sdc netlist/filter.sdc
 write -hierarchy -format vhdl -output netlist/opt_synth_filter_top.vhdl
 write -hierarchy -format verilog -output netlist/opt_time_filter_top.v
 
