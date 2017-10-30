@@ -11,6 +11,8 @@
 !**/netlist/.gitkeep
 **/report/*
 !**/report/.gitkeep
+**/soce/
+!**/soce/*.tcl
 dwsvf_*
 *.log
 *.svf

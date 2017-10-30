@@ -52,12 +52,7 @@ initial begin
     B[15:8]  = -2;
     B[7:0]   = -1;
 
-    $read_lib_saif("../saif/NangateOpenCellLibrary.saif");
-    $set_gate_level_monitoring("on");
-    $set_toggle_region(DUT);
-    $toggle_start;
-
-    data_file = $fopen("samples.txt", "r");
+    data_file = $fopen("../c/samples.txt", "r");
     if (data_file == `NULL) begin
         $display("data_file handle was NULL");
         $finish;
@@ -76,8 +71,6 @@ always @(negedge CLK) begin
         end
         else begin
             $display("Reached EOF!");
-	    $toggle_stop;
-	    $toggle_report("../saif/filter.saif", 1.0e-9, "tb_filter.DUT");
             $finish;
         end
     end
