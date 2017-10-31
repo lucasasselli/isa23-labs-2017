@@ -7,25 +7,31 @@ module tb_filter();
 // TB stuff
 integer data_file;
 integer scan_file;
-integer file_in;
+integer file_in0;
+integer file_in1;
+integer file_in2;
 
 // DUT I/O
 reg [(`NT+1)*(`NB)-1:0] B;
-reg [`NB-1:0] DIN;
+reg [`NB-1:0] DIN0, DIN1, DIN2;
 reg VIN;
 reg RST_n;
 reg CLK;
-wire [`NB-1:0] DOUT;
+wire [`NB-1:0] DOUT0, DOUT1, DOUT2;
 wire VOUT;
 reg signed [`NB-1:0] temp_out;
 
 filter_top DUT(
     .B(B),
-    .DIN(DIN),
+    .DIN0(DIN0),
+    .DIN1(DIN1),
+    .DIN2(DIN2),
     .VIN(VIN),
     .CLK(CLK),
     .RST_n(RST_n),
-    .DOUT(DOUT),
+    .DOUT0(DOUT0),
+    .DOUT1(DOUT1),
+    .DOUT2(DOUT2),
     .VOUT(VOUT)
 );
 
@@ -64,9 +70,14 @@ end
 // Push data
 always @(negedge CLK) begin
     if (RST_n == 1) begin
-        scan_file = $fscanf(data_file, "%d\n", file_in); 
+        // TODO: This is very bad
+        scan_file = $fscanf(data_file, "%d\n", file_in0); 
+        scan_file = $fscanf(data_file, "%d\n", file_in1); 
+        scan_file = $fscanf(data_file, "%d\n", file_in2); 
         if (!$feof(data_file)) begin
-            DIN = file_in[7:0];
+            DIN0 = file_in0[7:0];
+            DIN1 = file_in1[7:0];
+            DIN2 = file_in2[7:0];
             VIN = 1;
         end
         else begin
@@ -78,7 +89,11 @@ end
 
 always @(posedge CLK) begin
     if (VOUT == 1) begin
-        temp_out = DOUT;
+        temp_out = DOUT0;
+        $display("%d", temp_out);
+        temp_out = DOUT1;
+        $display("%d", temp_out);
+        temp_out = DOUT2;
         $display("%d", temp_out);
     end
 end
