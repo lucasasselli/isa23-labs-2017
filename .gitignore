@@ -1,21 +1,21 @@
-# Generic 
-**/work
-
 # Modelsim
-*/transcript
-.directory
+**work/
+transcript
 *.wlf
 
 # Synopsis
-**/netlist/*
-!**/netlist/.gitkeep
-**/report/*
-!**/report/.gitkeep
-**/soce/
-!**/soce/*.tcl
+lab_*/syn/netlist/*
+lab_*/syn/netlist/.gitkeep
+lab_*/syn/report/*
+lab_*/syn/report/.gitkeep
+lab_*/soce/*
+!lab_*/soce/*.tcl
 dwsvf_*
 *.log
 *.svf
 
 # C/CPP
 *.a
+
+# Other files
+.directory
