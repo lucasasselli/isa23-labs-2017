@@ -52,26 +52,11 @@ architecture behavioral of filter_top is
     signal sum_bus2 : t_bus(0 to NT);
     signal temp_bus2 : t_temp;
 
-    signal in_ff : t_bus(0 to NT);
+    signal in_ff : std_logic_vector(NB-1 downto 0);
     signal x_ff_in : t_bus(0 to NT);
     signal x_ff_out : t_bus(0 to NT);
 begin
 
-    -- Input flip-flop bank
-    in_ff_bank : process (CLK, RST_n)
-    begin
-        if CLK'event and CLK = '1' then
-            if RST_n = '0' then
-                for i in 0 to NU-1 loop
-                    in_ff(i) <= (others => '0');
-                end loop;
-            elsif VIN = '1' then
-                in_ff(0) <= DIN0;
-                in_ff(1) <= DIN1;
-                in_ff(2) <= DIN2;
-            end if;
-        end if;
-    end process;
 
     -- Internal flip-flop bank
     x_ff_bank : process (CLK, RST_n)
@@ -101,6 +86,7 @@ begin
         end if;
     end process;
 
+    -- Trim multiplier result to 8 bits
     gen_mul_bus : for i in 0 to NT generate
         -- Block 0
         temp_bus0(i) <= y0(i) * B((NT+1)*(NB)-NB*i-1 downto (NT+1)*(NB)-NB*(i+1));
@@ -109,31 +95,79 @@ begin
         temp_bus1(i) <= y1(i) * B((NT+1)*(NB)-NB*i-1 downto (NT+1)*(NB)-NB*(i+1));
         mul_bus1(i) <= temp_bus1(i)(2*NB-2 downto NB-1);
         -- Block 2
-        temp_bus2(i) <= y2(i) * B((NT+1)*(NB)-NB*i-1 downto (NT+1)*(NB)-NB*(i+1));
         mul_bus2(i) <= temp_bus2(i)(2*NB-2 downto NB-1);
+        temp_bus2(i) <= y2(i) * B((NT+1)*(NB)-NB*i-1 downto (NT+1)*(NB)-NB*(i+1));
     end generate;
 
-    sum_bus0(0) <= mul_bus0(0);
-    sum_bus1(0) <= mul_bus1(0);
-    sum_bus2(0) <= mul_bus2(0);
-    gen_sum_bus : for i in 1 to NT generate
-        -- Block 0
-        sum_bus0(i) <= mul_bus0(i) + sum_bus0(i-1);
-        -- Block 1
-        sum_bus1(i) <= mul_bus1(i) + sum_bus1(i-1);
-        -- Block 2
-        sum_bus2(i) <= mul_bus2(i) + sum_bus2(i-1);
-    end generate;
+    sum_pipe_p : process (CLK, RST_n)
+    begin
+        if CLK'event and CLK = '1' then
+            if RST_n = '0' then
+                for i in 0 to NT loop
+                    -- Block 0
+                    sum_bus0(i) <= (others => '0');
+                    -- Block 1
+                    sum_bus1(i) <= (others => '0');
+                    -- Block 2
+                    sum_bus2(i) <= (others => '0');
+                end loop;
+            else
+                sum_bus0(0) <= mul_bus0(0);
+                sum_bus1(0) <= mul_bus1(0);
+                sum_bus2(0) <= mul_bus2(0);
+                for i in 1 to NT loop
+                    -- Block 0
+                    sum_bus0(i) <= mul_bus0(i) + sum_bus0(i-1);
+                    -- Block 1
+                    sum_bus1(i) <= mul_bus1(i) + sum_bus1(i-1);
+                    -- Block 2
+                    sum_bus2(i) <= mul_bus2(i) + sum_bus2(i-1);
+                end loop;
+            end if;
+        end if;
+    end process;
 
-    y0(0) <= in_ff(0);
-    y1(0) <= in_ff(1);
-    y2(0) <= in_ff(2);
-    gen_wires : for i in 0 to NT-1 generate
+    -- Input flip-flop
+    in_ff : process (CLK, RST_n)
+    begin
+        if CLK'event and CLK = '1' then
+            if RST_n = '0' then
+                for i in 0 to NU-1 loop
+                    in_ff <= (others => '0');
+                end loop;
+            elsif VIN = '1' then
+                in_ff <= DIN0;
+            end if;
+        end if;
+    end process;
+
+    y0(0) <= in_ff;
+    test : for i in 0 to NT-1 generate
         y0(i+1) <= x_ff_out(i);
-        y1(i+1) <= y0(i);
-        y2(i+1) <= y1(i);
-        x_ff_in(i) <= y2(i);
     end generate;
+
+    inner_pipe_p : process (CLK, RST_n)
+    begin
+        if CLK'event and CLK = '1' then
+            if RST_n = '0' then
+                for i in 0 to NT loop
+                    y1(i) <= (others => '0');
+                    y2(i) <= (others => '0');
+                    x_ff_in(i) <= (others => '0');
+                end loop;
+            else
+                if VIN = '1' then
+                    y1(0) <= DIN1;
+                    y2(0) <= DIN2;
+                    for i in 0 to NT-1 loop
+                        y1(i+1) <= y0(i);
+                        y2(i+1) <= y1(i);
+                        x_ff_in(i) <= y2(i);
+                    end loop;
+                end if;
+            end if;
+        end if;
+    end process;
 
     DOUT0 <= sum_bus0(NT);
     DOUT1 <= sum_bus1(NT);
