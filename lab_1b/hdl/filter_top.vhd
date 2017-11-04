@@ -34,8 +34,6 @@ architecture behavioral of filter_top is
 
     type t_temp is array(0 to NT) of std_logic_vector(2*NB-1 downto 0);
 
-    signal cnt : std_logic_vector(1 downto 0);
-
     -- I=0 Block
     signal y0 : t_bus(0 to NT);
     signal mul_bus0 : t_bus(0 to NT);
@@ -65,12 +63,12 @@ begin
         if CLK'event and CLK = '1' then
             if RST_n = '0' then
                 for i in 0 to NU-1 loop
-                    in_x_ff_out(i) <= (others => '0');
+                    in_ff(i) <= (others => '0');
                 end loop;
             elsif VIN = '1' then
-                in_x_ff_out(0) <= DIN0;
-                in_x_ff_out(1) <= DIN1;
-                in_x_ff_out(2) <= DIN2;
+                in_ff(0) <= DIN0;
+                in_ff(1) <= DIN1;
+                in_ff(2) <= DIN2;
             end if;
         end if;
     end process;
@@ -87,6 +85,18 @@ begin
                 for i in 0 to NT-1 loop
                     x_ff_out(i) <= x_ff_in(i);
                 end loop;
+            end if;
+        end if;
+    end process;
+
+    -- VOUT flip-flop
+    vout_p : process (CLK, RST_n)
+    begin
+        if CLK'event and CLK = '1' then
+            if RST_n = '0' then
+                VOUT <= '1';
+            else
+                VOUT <= VIN;
             end if;
         end if;
     end process;
@@ -115,9 +125,9 @@ begin
         sum_bus2(i) <= mul_bus2(i) + sum_bus2(i-1);
     end generate;
 
-    y0(0) <= DIN0;
-    y1(0) <= DIN1;
-    y2(0) <= DIN2;
+    y0(0) <= in_ff(0);
+    y1(0) <= in_ff(1);
+    y2(0) <= in_ff(2);
     gen_wires : for i in 0 to NT-1 generate
         y0(i+1) <= x_ff_out(i);
         y1(i+1) <= y0(i);
@@ -125,8 +135,8 @@ begin
         x_ff_in(i) <= y2(i);
     end generate;
 
-    DOUT0 <= sum_bus0(NT)
-    DOUT1 <= sum_bus1(NT)
-    DOUT2 <= sum_bus2(NT)
+    DOUT0 <= sum_bus0(NT);
+    DOUT1 <= sum_bus1(NT);
+    DOUT2 <= sum_bus2(NT);
 
 end behavioral;
