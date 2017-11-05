@@ -56,7 +56,7 @@ begin
     begin
         if CLK'event and CLK = '1' then
             if RST_n = '0' then
-                VOUT <= '1';
+                VOUT <= '0';
             else
                 VOUT <= VIN;
             end if;
