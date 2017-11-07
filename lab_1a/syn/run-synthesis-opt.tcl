@@ -10,16 +10,8 @@ set power_preserve_rtl_hier_names true
 # Analyze HDL
 elaborate filter_top -architecture behavioral -library WORK
 
-# Dumb compilation
-create_clock -name MY_CLK -period 0
-compile -exact_map
-
-# Report preliminary results
-report_timing > report/free_time_filter_top.txt
-report_area > report/free_area_filter_top.txt
-
-# set constraints
-create_clock -name MY_CLK -period 8.6 CLK
+# Set constraints
+create_clock -name MY_CLK -period 10.16 CLK
 set_dont_touch_network MY_CLK
 set_clock_uncertainty 0.07 [get_clocks MY_CLK]
 set_input_delay 0.5 -max -clock MY_CLK [remove_from_collection [all_inputs] CLK]

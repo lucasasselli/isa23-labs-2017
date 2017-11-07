@@ -46,6 +46,10 @@ initial begin
     RST_n = 0;
     VIN = 0;
 
+    DIN0 = 0;
+    DIN1 = 0;
+    DIN2 = 0;
+
     B[87:80] = -1;
     B[79:72] = -2;
     B[71:64] = -4;

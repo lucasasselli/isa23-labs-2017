@@ -15,69 +15,67 @@
 # Loading work.tb_filter(fast)
 # Loading work.filter_top(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.DFF_X1(fast)
-# Loading /software/dk/nangate45/verilog/msim6.2g.CLKBUF_X1(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.BUF_X1(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.OAI22_X1(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.INV_X1(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.NAND2_X1(fast)
+# Loading /software/dk/nangate45/verilog/msim6.2g.AND2_X1(fast)
+# Loading /software/dk/nangate45/verilog/msim6.2g.CLKBUF_X1(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.XNOR2_X1(fast)
-# Loading /software/dk/nangate45/verilog/msim6.2g.AND3_X1(fast)
-# Loading /software/dk/nangate45/verilog/msim6.2g.OR3_X1(fast)
-# Loading /software/dk/nangate45/verilog/msim6.2g.OAI21_X1(fast)
-# Loading /software/dk/nangate45/verilog/msim6.2g.AOI21_X1(fast)
-# Loading /software/dk/nangate45/verilog/msim6.2g.OAI222_X1(fast)
-# Loading /software/dk/nangate45/verilog/msim6.2g.AOI22_X1(fast)
-# Loading /software/dk/nangate45/verilog/msim6.2g.AOI222_X1(fast)
-# Loading /software/dk/nangate45/verilog/msim6.2g.NOR2_X1(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.XOR2_X1(fast)
+# Loading /software/dk/nangate45/verilog/msim6.2g.AOI22_X1(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.NAND3_X1(fast)
+# Loading /software/dk/nangate45/verilog/msim6.2g.OAI21_X1(fast)
+# Loading /software/dk/nangate45/verilog/msim6.2g.OR3_X1(fast)
+# Loading /software/dk/nangate45/verilog/msim6.2g.NOR2_X1(fast)
+# Loading /software/dk/nangate45/verilog/msim6.2g.AOI21_X1(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.MUX2_X1(fast)
+# Loading /software/dk/nangate45/verilog/msim6.2g.AND3_X1(fast)
+# Loading /software/dk/nangate45/verilog/msim6.2g.OAI222_X1(fast)
+# Loading /software/dk/nangate45/verilog/msim6.2g.AOI222_X1(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.HA_X1(fast)
 # Loading /software/dk/nangate45/verilog/msim6.2g.FA_X1(fast)
-# Loading /software/dk/nangate45/verilog/msim6.2g.AND2_X1(fast)
 # Loading instances from ../syn/netlist/filter_top.sdf
 # ** Warning: (vsim-3017) tb_filter.v(30): [TFMPC] - Too few port connections. Expected 8, found 7.
 #         Region: /tb_filter/DUT
 # ** Warning: (vsim-3722) tb_filter.v(30): [TFMPC] - Missing connection for port 'A'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(566): [TFMPC] - Too few port connections. Expected 4, found 3.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(653): [TFMPC] - Too few port connections. Expected 4, found 3.
 #         Region: /tb_filter/DUT/VOUT_reg
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(566): [TFMPC] - Missing connection for port 'QN'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3254): [TFMPC] - Too few port connections. Expected 5, found 4.
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(653): [TFMPC] - Missing connection for port 'QN'.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3243): [TFMPC] - Too few port connections. Expected 5, found 4.
 #         Region: /tb_filter/DUT/add_6_root_add_0_root_add_73_U1_7
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3254): [TFMPC] - Missing connection for port 'CO'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3279): [TFMPC] - Too few port connections. Expected 5, found 4.
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3243): [TFMPC] - Missing connection for port 'CO'.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3268): [TFMPC] - Too few port connections. Expected 5, found 4.
 #         Region: /tb_filter/DUT/add_8_root_add_0_root_add_73_U1_7
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3279): [TFMPC] - Missing connection for port 'CO'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3304): [TFMPC] - Too few port connections. Expected 5, found 4.
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3268): [TFMPC] - Missing connection for port 'CO'.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3293): [TFMPC] - Too few port connections. Expected 5, found 4.
 #         Region: /tb_filter/DUT/add_9_root_add_0_root_add_73_U1_7
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3304): [TFMPC] - Missing connection for port 'CO'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3329): [TFMPC] - Too few port connections. Expected 5, found 4.
-#         Region: /tb_filter/DUT/add_2_root_add_0_root_add_73_U1_7
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3329): [TFMPC] - Missing connection for port 'CO'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3354): [TFMPC] - Too few port connections. Expected 5, found 4.
-#         Region: /tb_filter/DUT/add_5_root_add_0_root_add_73_U1_7
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3354): [TFMPC] - Missing connection for port 'CO'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3379): [TFMPC] - Too few port connections. Expected 5, found 4.
-#         Region: /tb_filter/DUT/add_3_root_add_0_root_add_73_U1_7
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3379): [TFMPC] - Missing connection for port 'CO'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3404): [TFMPC] - Too few port connections. Expected 5, found 4.
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3293): [TFMPC] - Missing connection for port 'CO'.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3318): [TFMPC] - Too few port connections. Expected 5, found 4.
 #         Region: /tb_filter/DUT/add_7_root_add_0_root_add_73_U1_7
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3404): [TFMPC] - Missing connection for port 'CO'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3429): [TFMPC] - Too few port connections. Expected 5, found 4.
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3318): [TFMPC] - Missing connection for port 'CO'.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3343): [TFMPC] - Too few port connections. Expected 5, found 4.
+#         Region: /tb_filter/DUT/add_2_root_add_0_root_add_73_U1_7
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3343): [TFMPC] - Missing connection for port 'CO'.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3368): [TFMPC] - Too few port connections. Expected 5, found 4.
+#         Region: /tb_filter/DUT/add_3_root_add_0_root_add_73_U1_7
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3368): [TFMPC] - Missing connection for port 'CO'.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3393): [TFMPC] - Too few port connections. Expected 5, found 4.
+#         Region: /tb_filter/DUT/add_5_root_add_0_root_add_73_U1_7
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3393): [TFMPC] - Missing connection for port 'CO'.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3418): [TFMPC] - Too few port connections. Expected 5, found 4.
 #         Region: /tb_filter/DUT/add_4_root_add_0_root_add_73_U1_7
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3429): [TFMPC] - Missing connection for port 'CO'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3454): [TFMPC] - Too few port connections. Expected 5, found 4.
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3418): [TFMPC] - Missing connection for port 'CO'.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3443): [TFMPC] - Too few port connections. Expected 5, found 4.
 #         Region: /tb_filter/DUT/add_1_root_add_0_root_add_73_U1_7
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3454): [TFMPC] - Missing connection for port 'CO'.
-# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3478): [TFMPC] - Too few port connections. Expected 5, found 4.
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3443): [TFMPC] - Missing connection for port 'CO'.
+# ** Warning: (vsim-3017) ../syn/netlist/filter_top.v(3467): [TFMPC] - Too few port connections. Expected 5, found 4.
 #         Region: /tb_filter/DUT/add_0_root_add_0_root_add_73_U1_7
-# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3478): [TFMPC] - Missing connection for port 'CO'.
+# ** Warning: (vsim-3722) ../syn/netlist/filter_top.v(3467): [TFMPC] - Missing connection for port 'CO'.
 # Loading timing data from ../syn/netlist/filter_top.sdf
 # ** Note: (vsim-3587) SDF Backannotation Successfully Completed.
 #    Time: 0 ns  Iteration: 0  Region: /tb_filter  File: tb_filter.v
 # run -all 
-#    0
-#    0
 #    0
 #   -1
 #   -1
