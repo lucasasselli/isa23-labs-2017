@@ -2,6 +2,7 @@
 **work/
 **/transcript
 *.wlf
+*.vcd
 
 # Synopsis
 lab_*/syn/netlist/*
@@ -9,9 +10,11 @@ lab_*/syn/netlist/.gitkeep
 lab_*/syn/report/*
 lab_*/syn/report/.gitkeep
 lab_*/soce/*
-!lab_*/soce/*.tcl
+!lab_*/soce/run-placeandroute.tcl
+!lab_*/soce/run-power.tcl
+!lab_*/soce/mmm_design.tcl
+!lab_*/soce/design.globals
 dwsvf_*
-*.log
 *.svf
 
 # C/CPP
@@ -19,3 +22,6 @@ dwsvf_*
 
 # Other files
 .directory
+*~
+*.log
+*.cmd
