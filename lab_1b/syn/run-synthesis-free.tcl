@@ -1,4 +1,5 @@
-#Clear old 
+# Clear old 
+sh rm -rf work
 remove_design -designs
 
 # Load project
@@ -23,17 +24,8 @@ set_output_delay 0.5 -max -clock MY_CLK [all_outputs]
 set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
 set_load $OLOAD [all_outputs]
 
-# Smart compilation
-# compile -map_effort high
+# Compile
 compile
-
-# Export optimized netlist
-# ungroup -all -flatten
-# change_names -hierarchy -rules verilog
-# write_sdf netlist/filter_top.sdf
-# write_sdc netlist/filter_top.sdc
-# write -hierarchy -format vhdl -output netlist/filter_top.vhdl
-# write -hierarchy -format verilog -output netlist/filter_top.v
 
 # Report optimized results
 report_timing > report/free_time_filter_top.txt

@@ -2,10 +2,10 @@
 (SAIFVERSION "2.0" "lib")
 (DIRECTION "forward")
 (DESIGN )
-(DATE "Tue Nov 14 18:23:10 2017")
+(DATE "Wed Nov 29 17:56:28 2017")
 (VENDOR "Synopsys, Inc")
 (PROGRAM_NAME "Power Compiler lib2saif")
-(VERSION "Z-2007.03-SP1")
+(VERSION "F-2011.09-SP3")
 (DIVIDER / )
 (LIBRARY "NangateOpenCellLibrary"
   (MODULE "AND2_X1"

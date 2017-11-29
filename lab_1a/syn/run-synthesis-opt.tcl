@@ -1,4 +1,5 @@
 #Clear old 
+sh rm -rf work
 remove_design -designs
 
 # Load project
@@ -19,8 +20,7 @@ set_output_delay 0.5 -max -clock MY_CLK [all_outputs]
 set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
 set_load $OLOAD [all_outputs]
 
-# Smart compilation
-# compile -map_effort high
+# Compile
 compile
 
 # Export optimized netlist
