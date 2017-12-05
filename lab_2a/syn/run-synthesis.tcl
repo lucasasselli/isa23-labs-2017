@@ -1,8 +1,8 @@
 # rpl csa
 source run-synthesis-setup.tcl
 set REPORTPREF "rpl-csa"
-# set_implementation DW01_add/rpl [find cell *add_*]
-# set_implementation DW02_mult/csa [find cell *mult_*]
+set_implementation DW01_add/rpl [find cell *add_*]
+set_implementation DW02_mult/csa [find cell *mult_*]
 source run-synthesis-finish.tcl
 
 # rpl pparch
