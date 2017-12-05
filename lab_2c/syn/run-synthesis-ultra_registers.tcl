@@ -1,12 +1,11 @@
-#Clear old 
-sh rm -rf work
+# Clear old
 remove_design -designs
 
 # Load project
-analyze -library WORK -format vhdl {../hdl/filter_pkg.vhd}
 analyze -library WORK -format vhdl {../hdl/ff_gen.vhd}
 analyze -library WORK -format vhdl {../hdl/ff_pipe_gen.vhd}
 analyze -library WORK -format vhdl {../hdl/fir_stage.vhd}
+analyze -library WORK -format vhdl {../hdl/filter_pkg.vhd}
 analyze -library WORK -format vhdl {../hdl/filter_top.vhd}
 
 # Preserve RTL name in power consumtpion estimation
@@ -24,4 +23,15 @@ set_output_delay 0.5 -max -clock MY_CLK [all_outputs]
 set OLOAD [load_of NangateOpenCellLibrary/BUF_X4/A]
 set_load $OLOAD [all_outputs]
 
-ungroup -all -flatten
+# Compile
+compile_ultra
+optimize_registers
+
+
+# Report optimized results
+report_timing > report/ultra_reg_time_filter_top.txt
+report_area > report/ultra_reg_area_filter_top.txt
+report_resources > report/ultra_reg_resources.txt
+
+# Exit simulation
+quit
