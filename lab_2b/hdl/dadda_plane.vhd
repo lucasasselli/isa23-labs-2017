@@ -45,6 +45,8 @@ architecture behavioral of dadda_plane is
     signal l2_1_11 : std_logic;
     signal l2_0_15 : std_logic;
     signal l2_2_14 : std_logic;
+    signal l2_1_15 : std_logic;
+    signal l2_2_15 : std_logic;
     signal rca_in0 : std_logic_vector(15 downto 0);
     signal rca_in1 : std_logic_vector(15 downto 0);
     signal rca_S : std_logic_vector(15 downto 0);
@@ -102,11 +104,11 @@ begin
     l2_2_12 <= par_bus(3)(6);
     l2_2_13 <= par_bus(3)(7);
     l2_2_14 <= par_bus(3)(8);
+    l2_2_15 <= par_bus(3)(9);
     rca_in1(4) <= l2_2_4;
     rca_in1(0) <= '0';
     rca_in1(1) <= '0';
-    rca_in1(15) <= '0';
-    P <= rca_S(14) & rca_S(14 downto 0);
+    P <= rca_S(15 downto 0);
 
     --Instances
     C0 : HA port map (
@@ -130,46 +132,53 @@ begin
         C_out => l2_0_9);
 
     C3 : FA port map (
-        C_in => par_bus(0)(8),
+        C_in => par_bus(0)(9),
         A => par_bus(1)(7),
         B => par_bus(2)(5),
         S => l2_1_9,
         C_out => l2_0_10);
 
     C4 : FA port map (
-        C_in => par_bus(0)(8),
+        C_in => par_bus(0)(9),
         A => par_bus(1)(8),
         B => par_bus(2)(6),
         S => l2_1_10,
         C_out => l2_0_11);
 
     C5 : FA port map (
-        C_in => par_bus(0)(8),
-        A => par_bus(1)(8),
+        C_in => par_bus(0)(9),
+        A => par_bus(1)(9),
         B => par_bus(2)(7),
         S => l2_1_11,
         C_out => l2_0_12);
 
     C6 : FA port map (
-        C_in => par_bus(0)(8),
-        A => par_bus(1)(8),
+        C_in => par_bus(0)(9),
+        A => par_bus(1)(9),
         B => par_bus(2)(8),
         S => l2_1_12,
         C_out => l2_0_13);
 
     C7 : FA port map (
-        C_in => par_bus(0)(8),
-        A => par_bus(1)(8),
-        B => par_bus(2)(8),
+        C_in => par_bus(0)(9),
+        A => par_bus(1)(9),
+        B => par_bus(2)(9),
         S => l2_1_13,
         C_out => l2_0_14);
 
     C8 : FA port map (
-        C_in => par_bus(0)(8),
-        A => par_bus(1)(8),
-        B => par_bus(2)(8),
+        C_in => par_bus(0)(9),
+        A => par_bus(1)(9),
+        B => par_bus(2)(9),
         S => l2_1_14,
         C_out => l2_0_15);
+
+    C8x : FA port map (
+        C_in => par_bus(0)(9),
+        A => par_bus(1)(9),
+        B => par_bus(2)(9),
+        S => l2_1_15,
+        C_out => open);
 
     C9 : HA port map (
         A => l2_0_4,
@@ -247,6 +256,13 @@ begin
         S => rca_in1(14),
         C_out => rca_in0(15));
 
+    C19x : FA port map (
+        C_in => l2_0_15,
+        A => l2_1_15,
+        B => l2_2_15,
+        S => rca_in1(15),
+        C_out => open);
+
     RCA_i : RCA
     generic map(
         NBIT => 16 )
@@ -256,6 +272,5 @@ begin
         C_in => '0',
         S => rca_S,
         C_out => rca_C_out );
-
 
 end behavioral;

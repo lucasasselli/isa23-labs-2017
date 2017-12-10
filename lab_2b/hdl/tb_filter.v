@@ -6,10 +6,12 @@ module tb_filter();
 
 // TB stuff
 integer data_file;
-integer scan_file;
-integer file_in0;
-integer file_in1;
-integer file_in2;
+integer result_file;
+integer r;
+integer i;
+integer file_in[2:0];
+integer error;
+integer temp;
 
 // DUT I/O
 reg [(`NT+1)*(`NB)-1:0] B;
@@ -19,7 +21,7 @@ reg RST_n;
 reg CLK;
 wire [`NB-1:0] DOUT0, DOUT1, DOUT2;
 wire VOUT;
-reg signed [`NB-1:0] temp_out;
+wire signed [`NB-1:0] temp_out[2:0];
 
 filter_top DUT(
     .B(B),
@@ -41,10 +43,17 @@ begin
     #5 CLK <= ! CLK;
 end 
 
+assign temp_out[0] = DOUT0;
+assign temp_out[1] = DOUT1;
+assign temp_out[2] = DOUT2;
+
 initial begin
+    error = 0;
+
     CLK = 0;
     RST_n = 0;
     VIN = 0;
+
 
     DIN0 = 0;
     DIN1 = 0;
@@ -68,24 +77,29 @@ initial begin
         $finish;
     end
 
+    result_file = $fopen("../c/resultsc.txt", "r");
+    if (result_file == `NULL) begin
+        $display("result_file handle was NULL");
+        $finish;
+    end
+
     #23 RST_n = 1;
 end
 
 // Push data
 always @(negedge CLK) begin
     if (RST_n == 1) begin
-        // TODO: This is very bad
-        scan_file = $fscanf(data_file, "%d\n", file_in0); 
-        scan_file = $fscanf(data_file, "%d\n", file_in1); 
-        scan_file = $fscanf(data_file, "%d\n", file_in2); 
+        for(i=0; i<3; i=i+1) begin
+            r = $fscanf(data_file, "%d\n", file_in[i]); 
+        end
         if (!$feof(data_file)) begin
-            DIN0 = file_in0[7:0];
-            DIN1 = file_in1[7:0];
-            DIN2 = file_in2[7:0];
+            DIN0 = file_in[0][7:0];
+            DIN1 = file_in[1][7:0];
+            DIN2 = file_in[2][7:0];
             VIN = 1;
         end
         else begin
-            $display("Reached EOF!");
+            $display("Reached EOF! Errors: %d", error);
             $finish;
         end
     end
@@ -93,12 +107,12 @@ end
 
 always @(posedge CLK) begin
     if (VOUT == 1) begin
-        temp_out = DOUT0;
-        $display("%d", temp_out);
-        temp_out = DOUT1;
-        $display("%d", temp_out);
-        temp_out = DOUT2;
-        $display("%d", temp_out);
+        for(i=0; i<3; i=i+1) begin
+            r = $fscanf(result_file, "%d\n", temp); 
+            $display("%d", temp_out[i]);
+            if(temp_out[i] != temp)
+                error=error+1;
+        end
     end
 end
 

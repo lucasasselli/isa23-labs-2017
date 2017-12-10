@@ -3,30 +3,31 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 use ieee.std_logic_signed.all;
 use work.filter_pkg.all;
+use work.booth_mult_pkg.all;
 
 entity filter_top is 
     port ( 
-        A     : in std_logic_vector((NT)*(NB)-1 downto 0);
-        B     : in std_logic_vector((NT+1)*(NB)-1 downto 0);
-        DIN0   : in std_logic_vector(NB-1 downto 0);
-        DIN1   : in std_logic_vector(NB-1 downto 0);
-        DIN2   : in std_logic_vector(NB-1 downto 0);
+        A     : in std_logic_vector((FILTER_NT)*(FILTER_NB)-1 downto 0);
+        B     : in std_logic_vector((FILTER_NT+1)*(FILTER_NB)-1 downto 0);
+        DIN0   : in std_logic_vector(FILTER_NB-1 downto 0);
+        DIN1   : in std_logic_vector(FILTER_NB-1 downto 0);
+        DIN2   : in std_logic_vector(FILTER_NB-1 downto 0);
         VIN   : in std_logic;
         RST_n : in std_logic;
         CLK   : in std_logic;
-        DOUT0   : out std_logic_vector(NB-1 downto 0);
-        DOUT1   : out std_logic_vector(NB-1 downto 0);
-        DOUT2   : out std_logic_vector(NB-1 downto 0);
+        DOUT0   : out std_logic_vector(FILTER_NB-1 downto 0);
+        DOUT1   : out std_logic_vector(FILTER_NB-1 downto 0);
+        DOUT2   : out std_logic_vector(FILTER_NB-1 downto 0);
         VOUT  : out std_logic);
 end filter_top; 
 
 architecture behavioral of filter_top is
 
-    type t_wire is array (0 to NT) of std_logic;
-    type t_temp is array (0 to NU-1) of std_logic_vector(2*NB-1 downto 0);
-    type t_bus_arr is array(0 to NT) of t_bus(0 to NU-1);
+    type t_wire is array (0 to FILTER_NT) of std_logic;
+    type t_temp is array (0 to FILTER_NU-1) of std_logic_vector(2*FILTER_NB-1 downto 0);
+    type t_bus_arr is array(0 to FILTER_NT) of t_bus(0 to FILTER_NU-1);
 
-    signal in_ff : t_bus(0 to NU-1);
+    signal in_ff : t_bus(0 to FILTER_NU-1);
 
     signal x : t_bus_arr;
     signal s : t_bus_arr;
@@ -37,14 +38,14 @@ architecture behavioral of filter_top is
 
     component fir_stage is 
         port ( 
-            B     : in std_logic_vector(NB-1 downto 0);
-            X_in  : in t_bus(0 to NU-1);
-            S_in  : in t_bus(0 to NU-1);
+            B     : in std_logic_vector(FILTER_NB-1 downto 0);
+            X_in  : in t_bus(0 to FILTER_NU-1);
+            S_in  : in t_bus(0 to FILTER_NU-1);
             VIN   : in std_logic;
             RST_n : in std_logic;
             CLK   : in std_logic;
-            X_out : out t_bus(0 to NU-1);
-            S_out : out t_bus(0 to NU-1);
+            X_out : out t_bus(0 to FILTER_NU-1);
+            S_out : out t_bus(0 to FILTER_NU-1);
             VOUT  : out std_logic);
     end component; 
 
@@ -63,11 +64,10 @@ architecture behavioral of filter_top is
 
     component booth_mult is 
         port(
-            A : in std_logic_vector(7 downto 0);
-            B : in std_logic_vector(7 downto 0);
-            P : out std_logic_vector(15 downto 0));
+            A : in std_logic_vector(NBIT-1 downto 0);
+            B : in std_logic_vector(NBIT-1 downto 0);
+            P : out std_logic_vector(2*NBIT-1 downto 0));
     end component;
-
 
 begin
 
@@ -76,7 +76,7 @@ begin
     begin
         if CLK'event and CLK = '1' then
             if RST_n = '0' then
-                for i in 0 to NU-1 loop
+                for i in 0 to FILTER_NU-1 loop
                     in_ff(i) <= (others => '0');
                 end loop;
             elsif VIN = '1' then
@@ -104,25 +104,25 @@ begin
 
     x(0) <= in_ff;
 
-    -- Multiply and trim
-    gen_mul_bus : for i in 0 to NU-1 generate
-        booth_mult_0 : booth_mult
+    mul_gen : for i in 0 to FILTER_NU-1 generate
+
+        mul_i : booth_mult
         port map (
-            A  => x(0)(i),
-            B  => B((NT+1)*(NB)-1 downto NT*NB),
-            P  => mul_temp(i));
-        -- Truncate result
-        s(0)(i) <= mul_temp(i)(2*NB-2 downto NB-1);
+            A      => x(0)(i),
+            B      => B((FILTER_NT+1)*(FILTER_NB)-1 downto FILTER_NT*FILTER_NB),
+            P      => mul_temp(i));
+
+        s(0)(i) <= mul_temp(i)(2*FILTER_NB-2 downto FILTER_NB-1);
     end generate;
 
     --------------------------------------------------
     -- All the rest...
     --------------------------------------------------
 
-    stage_gen : for i in 0 to NT-1 generate
+    stage_gen : for i in 0 to FILTER_NT-1 generate
         fir_stage_0 : fir_stage
         port map (
-            B      => B((NT+1)*(NB)-NB*(i+1)-1 downto (NT+1)*(NB)-NB*(i+2)),
+            B      => B((FILTER_NT+1)*(FILTER_NB)-FILTER_NB*(i+1)-1 downto (FILTER_NT+1)*(FILTER_NB)-FILTER_NB*(i+2)),
             X_in  => x(i),
             S_in  => s(i),
             VIN    => v(i),
@@ -133,9 +133,9 @@ begin
             VOUT   => v(i+1));
     end generate;
 
-    DOUT0 <= s(NT)(0);
-    DOUT1 <= s(NT)(1);
-    DOUT2 <= s(NT)(2);
+    DOUT0 <= s(FILTER_NT)(0);
+    DOUT1 <= s(FILTER_NT)(1);
+    DOUT2 <= s(FILTER_NT)(2);
 
-    VOUT <= v(NT);
+    VOUT <= v(FILTER_NT);
 end behavioral;
