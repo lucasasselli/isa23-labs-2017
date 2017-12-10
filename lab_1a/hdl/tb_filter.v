@@ -52,7 +52,7 @@ initial begin
     B[15:8]  = -2;
     B[7:0]   = -1;
 
-    data_file = $fopen("../c/samples.txt", "r");
+    data_file = $fopen("../../common/fir_c/samples.txt", "r");
     if (data_file == `NULL) begin
         $display("data_file handle was NULL");
         $finish;

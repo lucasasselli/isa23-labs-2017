@@ -14,5 +14,5 @@ clean:
 	rm -rf work transcript *.wlf
 
 # Creates the work folder
-init:
+init: clean
 	vlib work 

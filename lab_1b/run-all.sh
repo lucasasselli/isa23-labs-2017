@@ -30,12 +30,12 @@ cd ../syn
 source /software/scripts/init_synopsys
 dc_shell-xg-t -f run-power.tcl
 
-# Run place and route
+# Run place-and-route
 cd ../soce
 source /software/scripts/init_edi13
 encounter -nowin -init run-placeroute.tcl
 
-# Compute pre place-and-route switching activity
+# Compute post place-and-route switching activity
 cd ../switch-post
 source /software/scripts/init_msim6.2g
 make clean

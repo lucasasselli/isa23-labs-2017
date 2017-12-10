@@ -3,11 +3,11 @@ sh rm -rf work
 remove_design -designs
 
 # Load project
-analyze -library WORK -format vhdl {../hdl/filter_pkg.vhd}
-analyze -library WORK -format vhdl {../hdl/ff_gen.vhd}
-analyze -library WORK -format vhdl {../hdl/ff_pipe_gen.vhd}
-analyze -library WORK -format vhdl {../hdl/fir_stage.vhd}
-analyze -library WORK -format vhdl {../hdl/filter_top.vhd}
+analyze -library WORK -format vhdl {../../lab_1b/hdl/filter_pkg.vhd}
+analyze -library WORK -format vhdl {../../lab_1b/hdl/ff_gen.vhd}
+analyze -library WORK -format vhdl {../../lab_1b/hdl/ff_pipe_gen.vhd}
+analyze -library WORK -format vhdl {../../lab_1b/hdl/fir_stage.vhd}
+analyze -library WORK -format vhdl {../../lab_1b/hdl/filter_top.vhd}
 
 # Preserve RTL name in power consumtpion estimation
 set power_preserve_rtl_hier_names true
