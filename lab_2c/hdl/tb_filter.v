@@ -50,7 +50,6 @@ initial begin
     DIN1 = 0;
     DIN2 = 0;
 
-
     B[87:80] = -1;
     B[79:72] = -2;
     B[71:64] = -4;
@@ -62,11 +61,6 @@ initial begin
     B[23:16] = -4;
     B[15:8]  = -2;
     B[7:0]   = -1;
-
-    $read_lib_saif("../saif/NangateOpenCellLibrary.saif");
-    $set_gate_level_monitoring("on");
-    $set_toggle_region(DUT);
-    $toggle_start;
 
     data_file = $fopen("../c/samples.txt", "r");
     if (data_file == `NULL) begin
