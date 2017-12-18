@@ -7,6 +7,7 @@ analyze -library WORK -format vhdl {../../lab_1b/hdl/filter_pkg.vhd}
 analyze -library WORK -format vhdl {../../lab_1b/hdl/ff_gen.vhd}
 analyze -library WORK -format vhdl {../../lab_1b/hdl/ff_pipe_gen.vhd}
 analyze -library WORK -format vhdl {../../lab_1b/hdl/fir_stage.vhd}
+analyze -library WORK -format vhdl {../../lab_1b/hdl/mul.vhd}
 analyze -library WORK -format vhdl {../../lab_1b/hdl/filter_top.vhd}
 
 # Preserve RTL name in power consumtpion estimation

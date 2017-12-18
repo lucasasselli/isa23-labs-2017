@@ -3,9 +3,12 @@
 set -e
 
 # Synthesize circuit
-cd ../syn
+cd syn
+rm -rf report netlist
+mkdir report netlist
 source /software/scripts/init_synopsys_64
 dc_shell-xg-t -f run-synthesis.tcl
+dc_shell-xg-t -f run-synthesis-ultra_registers.tlc
 
 # Test all circuits
 cd ../test
@@ -17,5 +20,5 @@ do
     make init
     cp $f filter_top.v 
     make all
-    vsim -c work.tb_filter -do "run -all"
+    vsim -c -L /software/dk/nangate45/verilog/msim6.2g work.tb_filter -do "run -all"
 done

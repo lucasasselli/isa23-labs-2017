@@ -6,14 +6,14 @@
 
 # Synopsis
 lab_*/syn/netlist/*
-lab_*/syn/netlist/.gitkeep
 lab_*/syn/report/*
-lab_*/syn/report/.gitkeep
 lab_*/soce/*
 !lab_*/soce/run-placeandroute.tcl
 !lab_*/soce/run-power.tcl
 !lab_*/soce/mmm_design.tcl
 !lab_*/soce/design.globals
+lab_*/test/*
+!lab_*/test/Makefile
 dwsvf_*
 *.svf
 

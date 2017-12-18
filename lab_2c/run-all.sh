@@ -12,7 +12,7 @@ vsim -c work.tb_filter -do "run -all"
 
 # Synthesize circuit
 cd ../syn
-rm -rf report netlist
-mkdir report netlist
+rm -rf netlist report
+mkdir netlist report
 source /software/scripts/init_synopsys
 dc_shell-xg-t -f run-synthesis.tcl
