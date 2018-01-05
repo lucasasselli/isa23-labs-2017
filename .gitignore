@@ -5,8 +5,9 @@
 *.vcd
 
 # Synopsis
-lab_*/syn/netlist/*
-lab_*/syn/report/*
+lab_*/syn/netlist*
+lab_*/syn/report*
+lab_*/syn/alib*
 lab_*/soce/*
 !lab_*/soce/run-placeandroute.tcl
 !lab_*/soce/run-power.tcl
