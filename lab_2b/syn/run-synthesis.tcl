@@ -23,7 +23,7 @@ set power_preserve_rtl_hier_names true
 elaborate filter_top -architecture behavioral -library WORK
 
 # Set constraints
-create_clock -name MY_CLK -period 0 CLK
+create_clock -name MY_CLK -period 2.34 CLK
 set_dont_touch_network MY_CLK
 set_clock_uncertainty 0.07 [get_clocks MY_CLK]
 set_input_delay 0.5 -max -clock MY_CLK [remove_from_collection [all_inputs] CLK]
@@ -37,6 +37,10 @@ compile
 # Report optimized results
 report_timing > report/free_time_filter_top.txt
 report_area > report/free_area_filter_top.txt
+
+# Export optimized netlist
+ungroup -all -flatten
+write -hierarchy -format verilog -output netlist/filter_top_Dadda.v
 
 # Exit simulation
 quit

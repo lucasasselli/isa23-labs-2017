@@ -10,4 +10,4 @@ report_resources -hierarchy > report_fmax/${REPORTPREF}_resources.txt
 
 # Export optimized netlist
 ungroup -all -flatten
-write -hierarchy -format verilog -output netlist/${REPORTPREF}_filter_top.vhdl
+write -hierarchy -format verilog -output netlist/${REPORTPREF}_filter_top_fmax.v
