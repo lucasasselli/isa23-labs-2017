@@ -1,0 +1,85 @@
+L1_8 51
+S1_8 8
+L2_8 98
+S2_8 8
+L1_16 25
+S1_16 8
+L2_16 50 
+S2_16 8
+L1_316 78
+S1_316 8
+L2_316 142 
+S2_316 8
+
+
+/// Compute the first lifting step of the pi/8 rotation
+///\param x1 first value
+///\param x2 second value
+static sample_t lift_pi8_1(sample_t x1, sample_t x2)
+{
+  sample_t tmp;
+
+  tmp = (x2*L1_8) >> S1_8;
+
+  return x1+tmp;
+}
+
+/// Compute the second lifting step of the pi/8 rotation
+///\param x1 first value
+///\param x2 second value
+static sample_t lift_pi8_2(sample_t x1, sample_t x2)
+{
+  sample_t tmp;
+
+  tmp = (x1*L2_8) >> S2_8;
+
+  return x2-tmp;
+}
+
+/// Compute the first lifting step of the pi/16 rotation
+///\param x1 first value
+///\param x2 second value
+static sample_t lift_pi16_1(sample_t x1, sample_t x2)
+{
+  sample_t tmp;
+
+  tmp = (x2*L1_16) >> S1_16;
+
+  return x1+tmp;
+}
+
+/// Compute the second lifting step of the pi/16 rotation
+///\param x1 first value
+///\param x2 second value
+static sample_t lift_pi16_2(sample_t x1, sample_t x2)
+{
+  sample_t tmp;
+
+  tmp = (x1*L2_16) >> S2_16;
+
+  return x2-tmp;
+}
+
+/// Compute the first lifting step of the 3pi/16 rotation
+///\param x1 first value
+///\param x2 second value
+static sample_t lift_3pi16_1(sample_t x1, sample_t x2)
+{
+  sample_t tmp;
+
+  tmp = (x2*L1_316) >> S1_316;
+
+  return x1+tmp;
+}
+
+/// Compute the second lifting step of the 3pi/16 rotation
+///\param x1 first value
+///\param x2 second value
+static sample_t lift_3pi16_2(sample_t x1, sample_t x2)
+{
+  sample_t tmp;
+
+  tmp = (x1*L2_316) >> S2_316;
+
+  return x2-tmp;
+}
