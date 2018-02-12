@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<osal version="0.1">
+
+  <operation>
+    <name>LIFT_PI8_1</name>
+    <description/>
+    <inputs>2</inputs>
+    <outputs>1</outputs>
+    <in element-count="1" element-width="32" id="1" type="SIntWord"/>
+    <in element-count="1" element-width="32" id="2" type="SIntWord"/>
+    <out element-count="1" element-width="32" id="3" type="SIntWord"/>
+  </operation>
+
+  <operation>
+    <name>LIFT_PI8_2</name>
+    <description/>
+    <inputs>2</inputs>
+    <outputs>1</outputs>
+    <in element-count="1" element-width="32" id="1" type="SIntWord"/>
+    <in element-count="1" element-width="32" id="2" type="SIntWord"/>
+    <out element-count="1" element-width="32" id="3" type="SIntWord"/>
+  </operation>
+
+  <operation>
+    <name>LIFT_PI16_1</name>
+    <description/>
+    <inputs>2</inputs>
+    <outputs>1</outputs>
+    <in element-count="1" element-width="32" id="1" type="SIntWord"/>
+    <in element-count="1" element-width="32" id="2" type="SIntWord"/>
+    <out element-count="1" element-width="32" id="3" type="SIntWord"/>
+  </operation>
+
+  <operation>
+    <name>LIFT_PI16_2</name>
+    <description/>
+    <inputs>2</inputs>
+    <outputs>1</outputs>
+    <in element-count="1" element-width="32" id="1" type="SIntWord"/>
+    <in element-count="1" element-width="32" id="2" type="SIntWord"/>
+    <out element-count="1" element-width="32" id="3" type="SIntWord"/>
+  </operation>
+
+  <operation>
+    <name>LIFT_PI316_1</name>
+    <description/>
+    <inputs>2</inputs>
+    <outputs>1</outputs>
+    <in element-count="1" element-width="32" id="1" type="SIntWord"/>
+    <in element-count="1" element-width="32" id="2" type="SIntWord"/>
+    <out element-count="1" element-width="32" id="3" type="SIntWord"/>
+  </operation>
+
+  <operation>
+    <name>LIFT_PI316_2</name>
+    <description/>
+    <inputs>2</inputs>
+    <outputs>1</outputs>
+    <in element-count="1" element-width="32" id="1" type="SIntWord"/>
+    <in element-count="1" element-width="32" id="2" type="SIntWord"/>
+    <out element-count="1" element-width="32" id="3" type="SIntWord"/>
+  </operation>
+
+</osal>

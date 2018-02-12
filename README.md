@@ -10,3 +10,5 @@
 | lab_2a | Optimized synthesis          |
 | lab_2b | Dadda plane                  |
 | lab_2c | Dadda plane with truncation  |
+| lab_3a | Basic TTA                    |
+| lab_3b | TTA With custom FU           |
